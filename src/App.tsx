@@ -1,16 +1,17 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
-import { Container, Flex, Heading, VStack, Text, SimpleGrid, GridItem, FormControl, FormLabel, Input, Select, Checkbox, Button, HStack, AspectRatio, Stack } from "@chakra-ui/react";
+import { Container, Flex, Heading, VStack, Text, SimpleGrid, GridItem, FormControl, FormLabel, Input, Select, Checkbox, Button, HStack, AspectRatio, Stack, useColorMode, useColorModeValue } from "@chakra-ui/react";
 
 function App() {
-	const [count, setCount] = useState(0);
+	const {toggleColorMode} = useColorMode();
+  const bgColor = useColorModeValue('gray.50', 'whiteAlpha.50');
+  const textNegru = useColorModeValue('gray.800', 'gray.200');
+  const textGri = useColorModeValue('gray.600', 'gray.400');
+  const liniediv = useColorModeValue("#E2E8F0", "#464E5A"); 
 
 	return (
 		<>
 			<Container maxW="1280px" p="0px">
-				<Flex direction={["column", "column", "row"]} h="100vh" py="40px">
+				<Flex direction={["column", "column", "row"]} h="100vh" py="40px" color={textNegru}>
 					<VStack w="full" h="full" p="40px" spacing="40px" alignItems="flex-start">
 						<VStack textAlign="left" align="left" alignItems="flex-start">
 							<Heading fontSize={["32px", "32px", "48px"]}>Your details</Heading>
@@ -71,12 +72,12 @@ function App() {
 						</SimpleGrid>
 					</VStack>
 
-					<VStack w="full" h="full" p="40px" spacing="24px" alignItems="flex-start" bg="gray.50">
+					<VStack w="full" h="full" p="40px" spacing="24px" alignItems="flex-start" bg={bgColor}>
 						<VStack textAlign="left" align="left" alignItems="flex-start">
 							<Heading fontSize={["32px", "32px", "48px"]}>Your cart</Heading>
 							<Text fontSize={["16px", "16px", "16px"]}>
 								If price is too hard on your eyes,{" "}
-								<Button variant="link" colorScheme="black">
+								<Button onClick={toggleColorMode} variant="link" colorScheme="purple">
 									try changing the theme.
 								</Button>
 							</Text>
@@ -90,7 +91,7 @@ function App() {
 								<Text fontSize="20px" fontWeight="700">
 									Penny board
 								</Text>
-								<Text fontSize="18px" fontWeight="400">
+								<Text fontSize="18px" fontWeight="400" color={textGri}>
 									PNYCOMP27541
 								</Text>
 							</Stack>
@@ -104,29 +105,29 @@ function App() {
 
             <VStack w='full' spacing='16px'>
             <Flex justifyContent="space-between" w='full'>
-              <Text fontSize="16px" fontWeight="400">Subtotal</Text>
+              <Text fontSize="16px" fontWeight="400" color={textGri}>Subtotal</Text>
               <Text fontSize="16px" fontWeight="700" fontFamily='Montserrat'>
 									$119.00
 								</Text>
             </Flex>
 
             <Flex justifyContent="space-between" w='full'>
-              <Text fontSize="16px" fontWeight="400">Shipping</Text>
+              <Text fontSize="16px" fontWeight="400" color={textGri}>Shipping</Text>
               <Text fontSize="16px" fontWeight="700" fontFamily='Montserrat'>
               $19.99
 								</Text>
             </Flex>
 
             <Flex justifyContent="space-between" w='full'>
-              <Text fontSize="16px" fontWeight="400">Taxes (estimated)</Text>
+              <Text fontSize="16px" fontWeight="400" color={textGri}>Taxes (estimated)</Text>
               <Text fontSize="16px" fontWeight="700" fontFamily='Montserrat'>
               $23.80
 								</Text>
             </Flex>
             </VStack>
 
-            <Flex justifyContent="space-between" w='full' pt='24px' borderTop="1px solid #E2E8F0">
-              <Text fontSize="16px" fontWeight="400">Total</Text>
+            <Flex justifyContent="space-between" w='full' pt='24px' borderTop={`1px solid ${liniediv}`}>
+              <Text fontSize="16px" fontWeight="400" color={textGri}>Total</Text>
               <Text fontSize="30px" fontWeight="700" fontFamily='Montserrat'>
               $162.79
 								</Text>
