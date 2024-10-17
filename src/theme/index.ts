@@ -1,6 +1,4 @@
-import { extendTheme, theme as base, withDefaultColorScheme, withDefaultVariant, Select, Checkbox, Button, border } from "@chakra-ui/react";
-import { DarkMode, LightMode } from "@chakra-ui/react";
-import { color } from "framer-motion";
+import { extendTheme, theme as base, withDefaultColorScheme, withDefaultVariant } from "@chakra-ui/react";
 
 const inputSelectStyles = {
     variants: {
@@ -21,15 +19,7 @@ const inputSelectStyles = {
     }
 };
 
-const brandRing = {
-    _focus: {
-        ring: 2,
-        ringColor: 'brand.500',
-    },
-};
-
-const tema = extendTheme({
-
+const customTheme = extendTheme({
     colors: {
         brand: {
             50: '#f5fee5',
@@ -57,62 +47,42 @@ const tema = extendTheme({
             baseStyle: {
                 control: {
                     borderRadius: 'none',
-                    ...brandRing,
+                    _focus: {
+                        ring: 2,
+                        ringColor: 'brand.500',
+                    },
                 },
             },
         },
         Button: {
             variants: {
-                primary: {
+                primary: (props) => ({
                     rounded: 'none',
-                    
-                    ...brandRing,
-
-                    _light:{
-                        bg: 'brand.500',
-                        color: 'white',
-                        _hover: {
-                            bg: 'brand.600',
-                            color: 'white',
-                        },
-                        _active: {
-                            bg: 'brand.700',
-                            color: 'white',
-                        }
+                    _focus: {
+                        ring: 2,
+                        ringColor: 'brand.500',
                     },
-
-                    _dark:{
-                        bg: 'brand.200',
-                        color: 'black',
-                        _hover: {
-                            bg: 'brand.400',
-                            color: 'black',
-                        },
-                        _active: {
-                            bg: 'brand.500',
-                            color: 'black',
-                        }
+                    bg: props.colorMode === 'light' ? 'brand.500' : 'brand.200',
+                    color: props.colorMode === 'light' ? 'white' : 'black',
+                    _hover: {
+                        bg: props.colorMode === 'light' ? 'brand.600' : 'brand.400',
                     },
-                    
-                }
-            }
+                    _active: {
+                        bg: props.colorMode === 'light' ? 'brand.700' : 'brand.500',
+                    },
+                }),
+            },
         },
     },
 },
-
     withDefaultColorScheme({
-
         colorScheme: 'brand',
         components: ['Checkbox', 'Button'],
-
     }),
-
     withDefaultVariant({
         variant: 'filled',
         components: ['Input', 'Select'],
     })
 );
 
-
-
-export default tema;
+export default customTheme;
