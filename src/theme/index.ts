@@ -1,4 +1,6 @@
-import { extendTheme, theme as base, withDefaultColorScheme, withDefaultVariant, Select, Checkbox, Button } from "@chakra-ui/react";
+import { extendTheme, theme as base, withDefaultColorScheme, withDefaultVariant, Select, Checkbox, Button, border } from "@chakra-ui/react";
+import { DarkMode, LightMode } from "@chakra-ui/react";
+import { color } from "framer-motion";
 
 const inputSelectStyles = {
     variants: {
@@ -17,6 +19,13 @@ const inputSelectStyles = {
             }
         }
     }
+};
+
+const brandRing = {
+    _focus: {
+        ring: 2,
+        ringColor: 'brand.500',
+    },
 };
 
 const tema = extendTheme({
@@ -48,21 +57,45 @@ const tema = extendTheme({
             baseStyle: {
                 control: {
                     borderRadius: 'none',
-                    _focus: {
-                        ring: 2,
-                        ringColor: 'brand.500',
-                    },
+                    ...brandRing,
                 },
             },
         },
         Button: {
-            baseStyle: {
-                borderRadius: 'none', 
-                _focus: {
-                    border: '2px',    // Add border on focus
-                    borderColor: 'brand.500', // Set border color
-                },
-            },
+            variants: {
+                primary: {
+                    rounded: 'none',
+                    
+                    ...brandRing,
+
+                    _light:{
+                        bg: 'brand.500',
+                        color: 'white',
+                        _hover: {
+                            bg: 'brand.600',
+                            color: 'white',
+                        },
+                        _active: {
+                            bg: 'brand.700',
+                            color: 'white',
+                        }
+                    },
+
+                    _dark:{
+                        bg: 'brand.200',
+                        color: 'black',
+                        _hover: {
+                            bg: 'brand.400',
+                            color: 'black',
+                        },
+                        _active: {
+                            bg: 'brand.500',
+                            color: 'black',
+                        }
+                    },
+                    
+                }
+            }
         },
     },
 },
